@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} product {% endblock %}
+
+ {% block stylesheets %}
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+     <link rel="stylesheet" href="/resources/demos/style.css">
+ {% endblock %}
+
+{% block body %}
+
+    <h1> My products:</h1>
+
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price(Rs)</th>
+            <th>Description</th>
+            <td>Action</td>
+        </tr>
+
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td> {{ product.price }}</td>
+                <td> <a href="{{ path('product_show', {'productDes': product.description}) }}">
+                        {{ product.description|length > 150 ? product.description|slice(0, 150) ~ '...' : product.description  }}
+                    </a>
+                </td>
+                <td><a class="delete" title="Delete product?" href="{{ path('delete_product', { id: product.id }) }}">
+                        Delete
+                    </a></td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+
+    <div id="dialog-confirm" title="Deleting product?">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>The product will be permanently deleted and cannot be recovered. Are you sure?</p>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $('.delete').on('click', function() {
+                var deleteLink = $(this).attr('href');
+                $( "#dialog-confirm" ).dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Delete Product": function() {
+                            $( this ).dialog( "close" );
+                            window.location = deleteLink;
+                        },
+                        "Cancel": function () {
+                            $( this ).dialog( "close" );
+                        }
+                    }
+
+                });
+                return false;
+            });
+        } );
+    </script>
+
+{% endblock %}
