@@ -1,0 +1,48 @@
+{% extends 'base.html.twig.' %}
+
+{% block title %} product from {% endblock %}
+
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12">
+                <form class="form-horizontal" role="form" method="POST"  action="{{ path('add_product', { id: category }) }}">
+
+                    <div class="form-group">
+                        <div class="col-md-9">
+                            <label class="control-label">Enter name</label>
+                            <input type="text" name="name" class="form-control"/>
+                        </div><!--col-md -->
+                    </div><!--from group-->
+
+                    <div class="form-group">
+                        <div class="col-md-9">
+                            <label class="control-label">Enter Price</label>
+                            <input type="text" name="price" class="form-control"/>
+                        </div><!--col-md -->
+                    </div><!--from group-->
+
+                    <div class="form-group">
+                        <div class="col-md-9">
+                            <label class="control-label">Enter Description</label>
+                            <input type="text" name="des" class="form-control"/>
+                        </div><!--col-md -->
+                    </div><!--from group-->
+
+                    <div class="form-group">
+                        <div class="col-md-9">
+                            <input type="submit" name="submit" value="save product" class="btn btn-primary" />
+                        </div><!--col-md -->
+                    </div><!--from group-->
+
+                </form>
+            </div><!-- col-->
+
+        </div><!-- row-->
+    </div> <!--conatiner -->
+
+{% endblock %}

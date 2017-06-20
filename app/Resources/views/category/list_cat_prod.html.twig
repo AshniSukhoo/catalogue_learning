@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Product categories {% endblock %}
+
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1> My categories of product:</h1>
+            </div><!col-xs-->
+        </div><!--row-->
+
+        <div class="row">
+            <div class="widget-content">
+                <table class="table table-bordered bg-warning" >
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                    </thead><!--thread-->
+
+                    <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>
+                                    <a  href="{{ path('show_specific_cat_prod', { id: product.id}) }}">
+                                        {{ product.name }}
+                                    </a>
+                                </td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody><!--tbody-->
+                </table><!--table-->
+
+                <input type="button" class="btn btn-primary" onclick="location='{{ path('get_prod_from', { id: category_id }) }}';" value="Add product to category">
+
+            </div><!--wid-->
+        </div><!--row-->
+
+    </div><!--conatiner-->
+
+{% endblock %}

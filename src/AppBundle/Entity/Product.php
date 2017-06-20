@@ -24,6 +24,27 @@ class Product
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Category")
+     */
+    private $category;
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+    }
+
 
     /**
      * @ORM\Column(type="integer")

@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} product categories {% endblock %}
+
+ {% block stylesheets %}
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+     <link rel="stylesheet" href="/resources/demos/style.css">
+ {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1> My category product:</h1>
+            </div><!col-xs-->
+        </div><!--row-->
+
+        <div class="row">
+            <div class="widget-content">
+                <table class="table table-bordered bg-warning" >
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price(Rs)</th>
+                        <th>Description</th>
+                        <td>Action</td>
+                    </tr>
+                    </thead><!--thread-->
+
+                    <tbody>
+                    <tr>
+                        <td>{{ specific_products.name }}</td>
+                        <td> {{ specific_products.price }}</td>
+                        <td>
+                            {{ specific_products.description|length > 150 ? specific_products.description|slice(0, 150) ~ '...' : specific_products.description  }}
+                        </td>
+                        <td><a class="delete" title="Delete product?" href="{{ path('delete_product', { id: specific_products.id }) }}">
+                                Delete
+                            </a></td>
+                    </tr>
+                    </tbody><!--tbody-->
+                </table><!--table-->
+
+            </div><!--wid-->
+
+        </div><!--row-->
+
+        <div class="row">
+            <div id="dialog-confirm" title="Deleting product?">
+                <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>The product will be permanently deleted and cannot be recovered. Are you sure?</p>
+            </div>
+        </div><!--roow-->
+
+    </div><!--conatiner-->
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $('.delete').on('click', function() {
+                var deleteLink = $(this).attr('href');
+                $( "#dialog-confirm" ).dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Delete Product": function() {
+                            $( this ).dialog( "close" );
+                            window.location = deleteLink;
+                        },
+                        "Cancel": function () {
+                            $( this ).dialog( "close" );
+                        }
+                    }
+
+                });
+                return false;
+            });
+        } );
+    </script>
+
+{% endblock %}

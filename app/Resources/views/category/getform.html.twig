@@ -1,0 +1,29 @@
+{% extends 'base.html.twig.' %}
+
+{% block title %} form {% endblock %}
+
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12">
+                <form class="form-horizontal" role="form" method="POST" action="{{ path('add_category') }}">
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label">Enter name</label>
+                            <input type="text" name="name" class="form-control"/> <br/><br>
+
+                            <input type="submit" name="submit" value="save category" class="btn btn-primary" />
+                        </div><!--col-md -->
+                    </div><!--from group-->
+
+                </form>
+            </div><!-- col-->
+
+        </div><!-- row-->
+    </div> <!--conatiner -->
+{% endblock %}
